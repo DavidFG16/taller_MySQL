@@ -20,7 +20,7 @@ JOIN empleados AS e ON u.usuario_id = e.usuario_id
 WHERE salario > 2500000;
 
 -- Lista los nombres de los productos en la categoría "Electrónica", ordenados alfabéticamente.
-SELECT * 
+SELECT nombre
 FROM productos
 WHERE categoria = 'Electrónica'
 ORDER BY nombre ASC;
@@ -38,7 +38,7 @@ ORDER BY precio DESC
 LIMIT 1;
 
 -- Obtén el total de pedidos realizados por cada cliente, mostrando el ID del cliente y el total de pedidos.
-SELECT u.usuario_id, COUNT(p.pedido_id) AS total_pedidos
+SELECT u.usuario_id,u.nombre, COUNT(p.pedido_id) AS total_pedidos
 FROM usuarios AS u  
 JOIN pedidos AS p ON u.usuario_id = p.cliente_id
 GROUP BY u.usuario_id;
