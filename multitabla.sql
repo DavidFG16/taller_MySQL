@@ -40,6 +40,19 @@ LEFT JOIN pedidos AS p ON e.empleado_id  = p.empleado_id
 SELECT e.empleado_id, e.puesto, p.pedido_id
 FROM empleados AS e
 LEFT JOIN pedidos AS p ON e.empleado_id  = p.empleado_id   
-WHERE p.empleado_id NOT IN (SELECT e.empleado_id FROM empleados) 
+WHERE p.pedido_id IS NULL
 
 -- Calcula el total gastado en cada pedido, mostrando el ID del pedido y el total, usando `JOIN`.
+SELECT p.pedido_id AS 'ID Pedido', dp.precio_unitario*cantidad AS Total
+FROM pedidos AS p
+JOIN detalles_pedidos AS dp ON dp.pedido_id = p.pedido_id
+
+-- Realiza un `CROSS JOIN` entre clientes y productos para mostrar 
+--todas las combinaciones posibles de clientes y productos.
+SELECT u.usuario_id, pro.nombre
+FROM usuarios as u
+CROSS JOIN productos AS pro
+    WHERE u.tipo_id = 1
+
+-- Encuentra los nombres de los clientes y los productos que han comprado, si existen, 
+--incluyendo los clientes que no han realizado pedidos usando `LEFT JOIN`.
