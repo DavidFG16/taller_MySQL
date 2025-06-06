@@ -56,3 +56,8 @@ CROSS JOIN productos AS pro
 
 -- Encuentra los nombres de los clientes y los productos que han comprado, si existen, 
 --incluyendo los clientes que no han realizado pedidos usando `LEFT JOIN`.
+SELECT p.pedido_id, u.nombre AS Cliente, pro.nombre AS 'Producto Comprado'
+FROM usuarios AS u
+INNER JOIN pedidos AS p ON u.usuario_id = p.cliente_id
+INNER JOIN detalles_pedidos AS dp ON p.pedido_id = p.pedido_id 
+LEFT JOIN productos AS pro ON dp.producto_id = pro.producto_id
